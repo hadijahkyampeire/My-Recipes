@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.background{
+  background: url('./images/bg3.jpg') no-repeat;
+  height: 100vh;
+  background-size: 100%;
+  background-size: cover;
+  padding:0 0 19% 0;
+}
+.signup{
+  display: block;
+  background-color: rgb(243, 219, 190);
+  width: 676px;
+}
+.tabs {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 48px;
+  width: 97% !important;
+  background-color: #fff;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+.card .card-image img {
+  display: block;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.card{
+  width:250px !important;
+}
+.close{
+  float: left;
+}
