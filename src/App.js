@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import Landing , {Nav}from './components/user/Landing';
 import Dashboard from './components/categories/dashboard';
 import store from './Reducers/index';
+import Login from './components/user/Login'
 import './App.css';
 import './index.css'
 
@@ -18,6 +19,7 @@ class App extends Component {
       <Nav/>
       <Switch>
         <Route exact path="/" component={Landing}/>
+        <Route exact path="/login" component={Login}/>
         <Route exact path="/dashboard" component={Dashboard}/>
         </Switch>
       </div>

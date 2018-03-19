@@ -20,11 +20,11 @@ const Login =(response)=>{
 }
 export const SignupAction =(data)=>{
     return async (dispatch)=>{
-        const request = await axios.post(`${BASE_URL}/auth/register`, data)
+        await axios.post(`${BASE_URL}/auth/register`, data)
         .then(response=>{
             dispatch(Signup(response));
             notify.show(response.data.message, 'success', 4000)
-            this.props.history.push('/')
+            window.location.assign('/login')
 
         }).catch(error=>{
             if(error.response){
@@ -39,12 +39,12 @@ export const SignupAction =(data)=>{
 
 export const LoginAction =(data, history)=>{
     return async (dispatch)=>{
-        const request = await axios.post(`${BASE_URL}/auth/login`, data)
+        await axios.post(`${BASE_URL}/auth/login`, data)
         .then(response=>{
             dispatch(Login(response));
             localStorage.setItem('token', response.data.access_token)
             notify.show(response.data.message, 'success', 4000)
-            history.push('/dashboard')
+            window.location.assign('/dashboard')
 
         }).catch(error=>{
             if(error.response){
