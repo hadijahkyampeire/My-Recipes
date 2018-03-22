@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CreateCategory from './CreateCategories';
 
 class Dashboard extends Component{
+  
     render(){
         return(
             <div className="dashboard" style={{marginLeft:20, paddingTop:10}}>

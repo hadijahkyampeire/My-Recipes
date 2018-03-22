@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {AddCategoryAction} from '../../Action_creators/categoryAction';
 
 class CreateCategory extends Component{
+  state={
+    name:''
+  }
+
+  handleInput=(event)=>{
+    const {name, value} = event.target;
+    this.setState({[name]: value});
+}
+
+handleAddCategories =(e)=>{
+  e.preventDefault();
+  // get our form data out of state
+  const { name } = this.state;
+  this.props.AddCategoryAction({ name });
+}
     render(){
+      const { name} = this.state
         return(
             <div>
   <a class="waves-effect waves-light btn modal-trigger left" href="#modal1">
@@ -12,22 +30,22 @@ class CreateCategory extends Component{
     <div class="modal-content">
       <h4>Add category</h4>
       <div class="row">
-    <form class="col s12">
+    <form class="col s12" onSubmit={this.handleAddCategories}>
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="name" type="text" class="validate"/>
+          <input placeholder="Placeholder" id="name" name="name" value={name} onChange={this.handleInput} type="text" class="validate"/>
           <label for="first_name">Category Name</label>
         </div>
         </div>
-        </form>
-        </div>
-    </div>
     <div className="row">
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-grey btn grey close">Close</a>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn">Add</a>
+      <button href="#!" class="modal-action modal-close waves-effect waves-grey btn grey close">Close</button>
+      <button type="submit" class="modal-action modal-close waves-effect waves-green btn">Add</button>
     </div>
     </div>
+    </form>
+  </div>
+  </div>
   </div>
   </div>
   </div>
@@ -35,4 +53,4 @@ class CreateCategory extends Component{
         );
     }
 }
-export default CreateCategory;
+export default connect(null, {AddCategoryAction})(CreateCategory);

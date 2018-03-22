@@ -1,30 +1,31 @@
-import axios from 'axios';
+
+import Axiosinstance from './AxiosInstance'
 import { notify } from 'react-notify-toast';
 
 const BASE_URL='http://localhost:5000/api/v1'
-const REGISTER ='register_user'
-export const AUTHENTICATED = 'authenticate_user'
+const ADDCATEGORY = 'addcategory'
+const GETCATEGORY = 'getcategories'
 
-const Signup =(response)=>{
+const Addcategory =(response)=>{
     return{
-        'type': REGISTER,
+        'type': ADDCATEGORY,
         'payload': response.data.message
     }
 }
 
-const Login =(response)=>{
+const Fetchcategories =(response)=>{
     return{
-        'type': AUTHENTICATED,
+        'type': GETCATEGORY,
         'payload': response.data.message
     }
 }
-export const SignupAction =(data)=>{
+
+export const AddCategoryAction =(data)=>{
     return async (dispatch)=>{
-        await axios.post(`${BASE_URL}/auth/register`, data)
+        await Axiosinstance.post(`${BASE_URL}/categories/`, data)
         .then(response=>{
-            dispatch(Signup(response));
+            dispatch(Addcategory(response));
             notify.show(response.data.message, 'success', 4000)
-            window.location.assign('/')
 
         }).catch(error=>{
             if(error.response){
@@ -35,16 +36,14 @@ export const SignupAction =(data)=>{
             }
         });        
     }
-} 
+}
 
-export const LoginAction =(data)=>{
+export const FetchCategoriesAction =(data)=>{
     return async (dispatch)=>{
-        await axios.post(`${BASE_URL}/auth/login`, data)
+        await Axiosinstance.get(`${BASE_URL}/categories/`, data)
         .then(response=>{
-            dispatch(Login(response));
-            localStorage.setItem('token', response.data.access_token)
+            dispatch(Fetchcategories(response));
             notify.show(response.data.message, 'success', 4000)
-            window.location.assign('/dashboard')
 
         }).catch(error=>{
             if(error.response){
@@ -53,6 +52,6 @@ export const LoginAction =(data)=>{
             }else if(error.request){
                 notify.show('Request errored', 'error', 4000)
             }
-        }) ;        
+        });        
     }
-} 
+}
