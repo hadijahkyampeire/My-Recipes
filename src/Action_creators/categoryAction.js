@@ -4,7 +4,8 @@ import { notify } from 'react-notify-toast';
 
 const BASE_URL='http://localhost:5000/api/v1'
 const ADDCATEGORY = 'addcategory'
-const GETCATEGORY = 'getcategories'
+export const GETCATEGORY = 'getcategories'
+export const UNAUTHENTICATED ='non_users'
 
 const Addcategory =(response)=>{
     return{
@@ -13,10 +14,11 @@ const Addcategory =(response)=>{
     }
 }
 
-const Fetchcategories =(response)=>{
+export const Fetchcategories =(response)=>{
+    console.log(response)
     return{
         'type': GETCATEGORY,
-        'payload': response.data.message
+        'payload': response.data
     }
 }
 
@@ -42,6 +44,7 @@ export const FetchCategoriesAction =(data)=>{
     return async (dispatch)=>{
         await Axiosinstance.get(`${BASE_URL}/categories/`, data)
         .then(response=>{
+            console.log(response.data)
             dispatch(Fetchcategories(response));
             notify.show(response.data.message, 'success', 4000)
 
